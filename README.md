@@ -1,2 +1,1 @@
-# test
-test
+# Information for using in Jenkins
