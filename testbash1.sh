@@ -1,2 +1,2 @@
 #!/bin/bash 
-echo "Name $1" 
+echo "Build number $1" 
