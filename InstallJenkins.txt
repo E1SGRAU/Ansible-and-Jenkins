@@ -1,0 +1,36 @@
+--- --- --- --- --- --- --- --- --- --- ---
+--- Install Jenkins on the linux/ubuntu ---
+--- --- --- --- --- --- --- --- --- --- ---
+sudo apt update
+java --version
+sudo apt -y install default-jre
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]   https://pkg.jenkins.io/debian-stable binary/ | sudo tee   /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt -y install jenkins
+
+#Даємо права Jenkins
+sudo usermod -aG jenkins ubuntu
+sudo usermod -aG ubuntu jenkins
+
+#Заходимо по "ip-adress" на Jenkins, інсталюємо все та створюємо pipeline  в якому програмуємо запуск .yml файла або на windows, або на linux
+#Скрипт pipline
+--- --- --- --- --- --- --- --- --- --- ---
+pipeline {
+    agent any
+    environment {
+        customWorkspace="/home/ubuntu/Ansible/"
+    }
+    parameters {
+        choice choices: ['linux_server', 'windows_server'], name: 'Choice'
+    }
+    stages {
+        stage("Workspace"){
+            steps{
+                sh 'cd ${customWorkspace} && ansible-playbook -i Hosts.txt -l $Choice InstallFirefox.yml'
+            }
+        }
+    }
+}
+--- --- --- --- --- --- --- --- --- --- ---
+#Зберігаємо та запускаємо
