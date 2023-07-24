@@ -1,0 +1,8 @@
+---
+- name: Instal FireFox
+  hosts: windows_server
+  tasks:
+    - name: Instal FireFox
+      win_chocolatey:
+        name: firefox
+        state: present
