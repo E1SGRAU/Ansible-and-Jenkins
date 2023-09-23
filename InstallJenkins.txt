@@ -12,6 +12,7 @@ sudo apt -y install jenkins
 #Даємо права Jenkins
 sudo usermod -aG jenkins ubuntu
 sudo usermod -aG ubuntu jenkins
+sudo usermod -aG sudo jenkins
 
 #Заходимо по "ip-adress" на Jenkins, інсталюємо все та створюємо pipeline  в якому програмуємо запуск .yml файла або на windows, або на linux
 #Скрипт pipline
